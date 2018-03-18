@@ -4,7 +4,7 @@
 
 ## Requirements
 - Only supports Linux
-- `network-manager-openvpn` & maybe `network-manager-openvpn-gnome` for GUI as well
+- `network-manager-openvpn` & `network-manager-openvpn-gnome`
 - __Python 3__ (Python 2 not tested)
 
 ## Instructions
