@@ -1,5 +1,6 @@
 #! /usr/bin/env python
 
+# License: CC0
 
 # For CSV parsing and ovpn file handling
 import os
@@ -7,6 +8,8 @@ import csv
 import base64, string
 import subprocess
 from subprocess import Popen, PIPE
+# For regex
+import re
 
 try:
 	# For Python 3.0 and later
@@ -20,9 +23,12 @@ except ImportError:
 
 def runme(program):
 	p = subprocess.Popen([program], shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+	output = ''
 	for line in p.stdout.readlines():
-		print(line)
+		#print(line)
+		output = output+'\n'+line.decode("utf-8")
 	retval = p.wait()
+	return output
 
 def deletefile(filename):
 	if os.path.isfile(filename):
@@ -44,21 +50,31 @@ f.write(htmlcode)
 with open('output.csv', newline='') as csvfile:
 	reader = csv.reader(csvfile, delimiter=',')
 	count = 0
+
+	# delete previous auto connections
+	output = runme('sudo /usr/bin/nmcli connection show')
+	#print( 'output:'+output )
+	connections = [word for word in output.split() if word.startswith('vpngateauto')]
+	# remove connection
+	for conn in connections:
+		print('deleting previously created auto connection '+conn+'...')
+		runme('sudo /usr/bin/nmcli connection delete id '+conn)
+
 	for row in reader:
-		# take first 2 connections
-		if count < 2:
+		# take first 4 connections
+		if count < 4:
 			if len(row) > 13 and row[14] != 'OpenVPN_ConfigData_Base64':
 				count = count + 1
 				decoded = base64.b64decode(row[14])
 				countrycode = row[6]
-				deletefile('vpngateauto_'+countrycode+'_'+str(count)+'.ovpn')
-				with open('vpngateauto_'+countrycode+'_'+str(count)+'.ovpn', 'a') as out:
+				ovpnname = 'vpngateauto_'+str(count)+'_'+countrycode
+				deletefile(ovpnname+'.ovpn')
+				with open(ovpnname+'.ovpn', 'a') as out:
 					out.write(decoded.decode('UTF-8') + '\n')
-				# remove connection
-				runme('sudo /usr/bin/nmcli connection delete id vpngateauto_'+countrycode+'_'+str(count))
 				# create connection
-				runme('sudo /usr/bin/nmcli connection import type openvpn file vpngateauto_'+countrycode+'_'+str(count)+'.ovpn')
-				deletefile('vpngateauto_'+countrycode+'_'+str(count)+'.ovpn')
+				print('creating vpngate auto connection '+ovpnname+'...')
+				runme('sudo /usr/bin/nmcli connection import type openvpn file '+ovpnname+'.ovpn')
+				deletefile(ovpnname+'.ovpn')
 				deletefile('output.csv')
 		else:
 			break
