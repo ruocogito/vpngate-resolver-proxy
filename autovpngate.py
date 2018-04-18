@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 # License: CC0
+# From: https://gist.github.com/adnan360/f5bf854a9278612e0effedbfa202d6fc
+# Run: python3 autovpngate.py
 
 # For CSV parsing and ovpn file handling
 import os
