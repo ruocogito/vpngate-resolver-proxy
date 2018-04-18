@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-
 # License: CC0
 
 # For CSV parsing and ovpn file handling
