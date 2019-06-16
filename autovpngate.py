@@ -39,7 +39,10 @@ def deletefile(filename):
 
 # --------------- Get data from vpngate ---------------
 
+print('downloading latest vpn connection data...')
 data = urlopen("http://www.vpngate.net/api/iphone/")
+print('download finished...')
+print('processing...')
 htmlcode = data.read().decode('UTF-8')
 
 deletefile(storagepath+'output.csv')
@@ -49,6 +52,7 @@ f.write(htmlcode)
 
 # --------------- Handle CSV and OVPN ---------------
 
+print('updating connections...')
 with open(storagepath+'output.csv', newline='') as csvfile:
 	reader = csv.reader(csvfile, delimiter=',')
 	count = 0
