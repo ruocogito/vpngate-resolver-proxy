@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # License: CC0
 # From: https://gist.github.com/adnan360/f5bf854a9278612e0effedbfa202d6fc
-# Run: python3 autovpngate.py
+# Run: python autovpngate.py
 
 # For CSV parsing and ovpn file handling
 import os
@@ -9,6 +9,13 @@ import csv
 import base64, string
 import subprocess
 from subprocess import Popen, PIPE
+# Set encoding to utf8 for Python 2
+# Python 3 has it set by default
+import sys
+if sys.version[0] == '2':
+	reload(sys)
+	sys.setdefaultencoding("utf-8")
+
 # For regex
 import re
 
@@ -41,19 +48,19 @@ def deletefile(filename):
 
 print('downloading latest vpn connection data...')
 data = urlopen("http://www.vpngate.net/api/iphone/")
+htmlcode = data.read()
 print('download finished...')
 print('processing...')
-htmlcode = data.read().decode('UTF-8')
 
 deletefile(storagepath+'output.csv')
-f = open(storagepath+'output.csv', 'w')
+f = open(storagepath+'output.csv', 'wb')
 f.write(htmlcode)
 
 
 # --------------- Handle CSV and OVPN ---------------
 
 print('updating connections...')
-with open(storagepath+'output.csv', newline='') as csvfile:
+with open(storagepath+'output.csv') as csvfile:
 	reader = csv.reader(csvfile, delimiter=',')
 	count = 0
 

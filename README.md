@@ -5,12 +5,12 @@
 ## Requirements
 - Only supports Linux
 - Requires `network-manager-openvpn` & `network-manager-openvpn-gnome` to be installed
-- __Python 3__ (Python 2 not tested)
+- Python 2 or 3
 
 ## Instructions
 Just download and run:
 ```
-sudo python3 autovpngate.py
+sudo python autovpngate.py
 ```
 
 It will take some time (it will download ~2MB file of records for latest connections) and it will ask for sudo password. Provide the password. Now you should have some connections on your NetworkManager, like `vpngateauto_1_JP`, `vpngateauto_2_HK` etc. Some connections may not work. So you can try the first one, if it doesn't work go on to the next one, etc.
@@ -25,7 +25,7 @@ It does basically 3 things:
 Example output:
 
 ```
-$> sudo python3 autovpngate.py
+$> sudo python autovpngate.py
 downloading latest vpn connection data...
 download finished...
 processing...
