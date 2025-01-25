@@ -1,0 +1,22 @@
+
+#start openvpn
+openvpn --config vpn_1_JP.ovpn --daemon --log openvpn.log
+
+#stop openvpn
+pkill openvpn
+
+#look's open ports
+ss -tuln | grep ':8282'
+
+#test proxy
+curl --proxy socks4://10.88.8.7:8282 https://whatismyipaddress.com/
+
+#looks nun0 interface
+root@neon1223:/data# ip a show tun0
+#output sample:
+44: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none
+    inet 10.211.1.29 peer 10.211.1.30/32 scope global tun0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a7b4:98b7:46f8:4a90/64 scope link stable-privacy
+       valid_lft forever preferred_lft forever

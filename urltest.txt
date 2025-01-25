@@ -1,0 +1,8 @@
+#URL list for test connected VPN
+#<URL>, <must existing substring>
+# OR
+#<URL> - only 20x status URL
+#
+https://www.intel.com/content/www/us/en/download-center/home.html,Download Drivers
+#https://2ip.ru/,ip_txt__header
+https://whatismyipaddress.com/,ip-address

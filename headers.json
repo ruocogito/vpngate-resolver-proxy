@@ -1,0 +1,19 @@
+{
+  "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0",
+  "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+  "Accept-Language" : "en-US,en;q=0.9,ru;q=0.8",
+  "Cache-Control" : "max-age=0",
+  "Dnt" : "1",
+  "Priority" : "u=0, i",
+  "Sec-Ch-Ua" : "\"Not A(Brand\";v=\"8\", \"Chromium\";v=\"132\", \"Microsoft Edge\";v=\"132\"",
+  "Sec-Ch-Ua-Arch" : "\"x86\"",
+  "Sec-Ch-Ua-Full-Version-List" : "\"Not A(Brand\";v=\"8.0.0.0\", \"Chromium\";v=\"132.0.6834.84\", \"Microsoft Edge\";v=\"132.0.2957.115\"",
+  "Sec-Ch-Ua-Mobile" : "?0",
+  "Sec-Ch-Ua-Platform" : "\"Windows\"",
+  "Sec-Ch-Ua-Platform-Version" : "\"15.0.0\"",
+  "Sec-Fetch-Dest" : "document",
+  "Sec-Fetch-Mode" : "navigate",
+  "Sec-Fetch-Site" : "none",
+  "Sec-Fetch-User" : "?1",
+  "Upgrade-Insecure-Requests" : "1"
+}

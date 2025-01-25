@@ -1,0 +1,31 @@
+services:
+  vpn:
+    image: vpngate
+    container_name: vpngate
+    build: .
+    volumes:
+#      - ./index.py:/usr/src/app/index.py
+      - ./data:/data
+#      - /var/run/dbus:/var/run/dbus
+#      - /run/dbus:/run/dbus
+    environment:
+       - SUBNET=${SUBNET}  # Reference the variable from .env
+#      - DEBIAN_FRONTEND=noninteractive
+    cap_add:
+      - NET_ADMIN
+#    command: >
+#      bash -c "python3 /usr/src/app/index.py"
+    networks:
+      - my-network
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
+#    security_opt:
+#      - apparmor:unconfined
+#    network_mode: host
+    ports:
+      - 8282:8282
+
+networks:
+  my-network:
+    name: main-net
+    external: true
